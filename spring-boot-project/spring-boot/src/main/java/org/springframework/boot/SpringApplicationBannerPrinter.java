@@ -39,6 +39,9 @@ class SpringApplicationBannerPrinter {
 
 	static final String BANNER_LOCATION_PROPERTY = "spring.banner.location";
 
+	/**
+	 * 自定义banner文件
+	 */
 	static final String DEFAULT_BANNER_LOCATION = "banner.txt";
 
 	private static final Banner DEFAULT_BANNER = new SpringBootBanner();
@@ -70,6 +73,7 @@ class SpringApplicationBannerPrinter {
 	}
 
 	private Banner getBanner(Environment environment) {
+		// 如果有自定义banner则优先输出自定义banner信息
 		Banner textBanner = getTextBanner(environment);
 		if (textBanner != null) {
 			return textBanner;

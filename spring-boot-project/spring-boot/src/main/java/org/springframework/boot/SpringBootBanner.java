@@ -30,6 +30,9 @@ import org.springframework.core.env.Environment;
  */
 class SpringBootBanner implements Banner {
 
+	/**
+	 * 默认banner信息
+	 */
 	private static final String[] BANNER = { "", "  .   ____          _            __ _ _",
 			" /\\\\ / ___'_ __ _ _(_)_ __  __ _ \\ \\ \\ \\", "( ( )\\___ | '_ | '_| | '_ \\/ _` | \\ \\ \\ \\",
 			" \\\\/  ___)| |_)| | | | | || (_| |  ) ) ) )", "  '  |____| .__|_| |_|_| |_\\__, | / / / /",
