@@ -50,6 +50,7 @@ public final class ImportCandidates implements Iterable<String> {
 
 	private ImportCandidates(List<String> candidates) {
 		Assert.notNull(candidates, "'candidates' must not be null");
+		// 封装为不可编辑的集合
 		this.candidates = Collections.unmodifiableList(candidates);
 	}
 
@@ -80,13 +81,17 @@ public final class ImportCandidates implements Iterable<String> {
 	public static ImportCandidates load(Class<?> annotation, ClassLoader classLoader) {
 		Assert.notNull(annotation, "'annotation' must not be null");
 		ClassLoader classLoaderToUse = decideClassloader(classLoader);
+		// 根据注解名称格式化路径
 		String location = String.format(LOCATION, annotation.getName());
+		// 找到所在目录下的所有.imports
 		Enumeration<URL> urls = findUrlsInClasspath(classLoaderToUse, location);
 		List<String> importCandidates = new ArrayList<>();
 		while (urls.hasMoreElements()) {
+			// 遍历每个配置，并读取配置中的内容，并添加到结果集合中
 			URL url = urls.nextElement();
 			importCandidates.addAll(readCandidateConfigurations(url));
 		}
+		// 将读取到的结果集封装为ImportCandidates对象并返回
 		return new ImportCandidates(importCandidates);
 	}
 
